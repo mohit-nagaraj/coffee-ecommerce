@@ -1,0 +1,72 @@
+export const products = [
+    {
+        id: 381781,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/516J5OB73qL.jpg",
+        category: "Whole Bean",
+        title: "Colombian Supremo Coffee Beans",
+        price: 1229,
+    },
+    {
+        id: 919884,
+        image: "https://jubileegrocery.com/wp-content/uploads/2023/12/41YyWj8RE7L.jpg",
+        category: "Ground Coffee",
+        title: "French Roast Ground Coffee",
+        price: 999,
+    },
+    {
+        id: 129812,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/71gp0wuDUnL.jpg",
+        category: "Espresso",
+        title: "Italian Espresso Blend",
+        price: 1799,
+    },
+    {
+        id: 591023,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/71oem7t8OrL.jpg",
+        category: "Single Serve",
+        title: "Organic Single Serve Coffee Pods",
+        price: 1999,
+    },
+    {
+        id: 262005,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/712fdO49EcL.jpg",
+        category: "Decaf",
+        title: "Swiss Water Decaf Coffee",
+        price: 1399,
+    },
+    {
+        id: 982131,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/6157KCwwCL.jpg",
+        category: "Cold Brew",
+        title: "Cold Brew Coffee Concentrate",
+        price: 1899,
+    },
+    {
+        id: 476265,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/81trXbAlXML.jpg",
+        category: "Flavored Coffee",
+        title: "Vanilla Hazelnut Flavored Coffee",
+        price: 1299,
+    },
+    {
+        id: 681788,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/413m5JndmTL.jpg",
+        category: "Dark Roast",
+        title: "Sumatra Dark Roast Coffee",
+        price: 1799,
+    },
+    {
+        id: 989789,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/51KvYwoLiqL.jpg",
+        category: "Light Roast",
+        title: "Ethiopian Yirgacheffe Coffee",
+        price: 1399,
+    },
+    {
+        id: 181790,
+        image: "https://jubileegrocery.com/wp-content/uploads/2024/01/71aHCnLj41L.jpg",
+        category: "Medium Roast",
+        title: "Brazilian Cerrado Coffee",
+        price: 1449,
+    }
+];
