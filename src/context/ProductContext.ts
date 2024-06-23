@@ -30,7 +30,7 @@ interface ProductProviderProps {
 const ProductProvider = ({ children }:ProductProviderProps) => {
   // products state
   const [products, setProducts] = useState<Product[]>([]);
-  
+
   // fetch products
   useEffect(() => {
     // const fetchProducts = async () => {
