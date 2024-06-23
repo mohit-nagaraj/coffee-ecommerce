@@ -31,7 +31,7 @@ const Product = ({ product }:{ product : any}) => {
           </button>
           <Link
             href={`/shop/product?pid=${id}`}
-            className="w-12 h-12 bg-white flex justify-center items-center text-primary drop-shadow-xl"
+            className="w-12 h-12 bg-white flex justify-center items-center text-gray-700 drop-shadow-xl"
           >
             <BsEyeFill />
           </Link>
