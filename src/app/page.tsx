@@ -1,4 +1,9 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "CoffeeBlend",
+  description: "The best coffee in the world",
+};
 export default function Home() {
   return (
     <section className="h-[800px] bg-hero bg-no-repeat bg-cover bg-center py-20">

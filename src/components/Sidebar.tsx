@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 import  Link  from "next/link";
 
@@ -10,8 +10,7 @@ import CartItem from "./CartItem";
 import { cart } from "@/util/dummy";
 
 
-const Sidebar = () => {
-  const [ isOpen, setIsOpen ] = useState(false);
+const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
 
   return (
     <div
@@ -22,7 +21,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-between py-6 border-b">
         <div className="uppercase text-sm font-semibold">Shopping Bag ({10})</div>
         <div
-          onClick={() => setIsOpen(false)}
+          onClick={closeSideBar}
           className="cursor-poniter w-8 h-8 flex justify-center items-center"
         >
           <IoMdArrowForward className="text-2xl" />

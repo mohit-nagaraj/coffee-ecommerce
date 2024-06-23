@@ -1,7 +1,11 @@
 import Footer from "@/components/Footer";
 import Product from "@/components/Product";
 import { products } from "@/util/dummy";
-
+import type { Metadata } from "next";
+export const metadata: Metadata = {
+    title: "CoffeeBlend - All Products",
+    description: "Coffee Products for all coffee lovers",
+  };
 const page = () => {
   return (
     <section className="pt-20">

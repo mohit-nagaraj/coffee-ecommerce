@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { BsBag } from "react-icons/bs";
 import Link from "next/link";
 
-const Header = () => {
+const Header = ({openSideBar}:{openSideBar:any}) => {
   // header state
   const [isActive, setIsActive] = useState(false);
   const itemAmount = 0;
@@ -13,7 +13,6 @@ const Header = () => {
       window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
     });
   });
-
   return (
     <header
       className={`${
@@ -29,7 +28,7 @@ const Header = () => {
         {<h2 className="text-2xl text-primary">CoffeeBlend</h2>}
         {/* cart */}
         <div onClick={() => {}} className="cursor-pointer flex relative">
-          <BsBag className="text-2xl" />
+          <BsBag className="text-2xl" onClick={openSideBar}/>
           <div className="bg-red-500 absolute -right-2 -bottom-2 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
             {itemAmount}
           </div>

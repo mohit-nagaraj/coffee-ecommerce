@@ -24,6 +24,7 @@ const ProductDetails = () => {
   if (!product) {
     return (
       <section className="h-screen flex justify-center items-center">
+        <title>CoffeeBlend</title>
         Loading...
       </section>
     );
@@ -33,6 +34,7 @@ const ProductDetails = () => {
   const { title, price, description, image } = product;
   return (
     <div>
+      <title>{'CoffeeBlend - '+title}</title>
       <section className="pt-[450px] md:pt-32 pb-[400px] md:pb-12 lg:py-32 h-screen flex items-center">
         <div className="container mx-auto">
           {/* image and text wrapper */}
