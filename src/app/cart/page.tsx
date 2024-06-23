@@ -12,6 +12,7 @@ const page = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   return (
     <section className="h-screen pt-20">
+      <title>Cart</title>
       <div className="h-full pb-10">
         <div className="h-full container mx-auto">
           <h1 className="text-3xl font-semibold mb-10">Your Cart</h1>
