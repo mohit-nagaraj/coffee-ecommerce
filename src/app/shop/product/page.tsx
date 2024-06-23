@@ -12,7 +12,6 @@ const ProductDetailsContent = () => {
 
   const getProduct = async () => {
     const { data } = await axios.post("/api/product-details", { id });
-    console.log(data);
     setProduct(data.data);
   };
 

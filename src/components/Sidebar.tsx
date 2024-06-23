@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import  Link  from "next/link";
 
@@ -7,10 +7,24 @@ import { IoMdArrowForward } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
 
 import CartItem from "./CartItem";
-import { cart } from "@/util/dummy";
+import axios from "axios";
 
 
 const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
+  //get user id from authentication
+  const user = 8055;
+  const [cart, setCart] = useState<{ id: number }[]>([]);
+  const [total, setTotal] = useState<number>(0);
+
+  const getCart = async () => {
+    const {data}  = await axios.post(`/api/cart-details`,{customerId:user});
+    setCart(data.data.cart);
+    setTotal(data.data.total);
+  };
+
+  useEffect(() => {
+    getCart();
+  }, [user]);
 
   return (
     <div
@@ -19,7 +33,7 @@ const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
       } "w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] lg:w-[40vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]"`}
     >
       <div className="flex items-center justify-between py-6 border-b">
-        <div className="uppercase text-sm font-semibold">Shopping Bag ({10})</div>
+        <div className="uppercase text-sm font-semibold">Shopping Bag ({cart.length})</div>
         <div
           onClick={closeSideBar}
           className="cursor-poniter w-8 h-8 flex justify-center items-center"
@@ -37,7 +51,7 @@ const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
           {/* total */}
           <div className="font-semibold">
             <span className="mr-2">Subtotal:</span> ₹ {" "}
-            {parseFloat('1000').toFixed(2)}
+            {total}
           </div>
           {/* clear cart icon */}
           <div
