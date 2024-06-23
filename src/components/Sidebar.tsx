@@ -47,18 +47,22 @@ const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
             <FiTrash2 />
           </div>
         </div>
+        <div onClick={closeSideBar}>
         <Link
-          href={"/"}
+          href={"/cart"}
           className="bg-gray-200 flex p-3 justify-center items-center text-primary w-full font-medium"
         >
           View Cart
         </Link>
+        </div>
+        <div onClick={closeSideBar}>
         <Link
           href={"/"}
           className="bg-primary flex p-3 justify-center items-center text-white w-full font-medium"
         >
           Checkout
         </Link>
+        </div>
       </div>
     </div>
   );
