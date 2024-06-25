@@ -27,9 +27,10 @@ const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
   }, [user]);
 
   return (
+    <div className={isOpen ?"w-screen fixed top-0 h-screen bg-slate-900/50 z-10":""}>
     <div
       className={`${
-        isOpen ? "right-0" : "-right-full"
+        isOpen ? "right-0 z-10" : "-right-full z-10"
       } "w-full bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] lg:w-[40vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px]"`}
     >
       <div className="flex items-center justify-between py-6 border-b">
@@ -78,6 +79,7 @@ const Sidebar = ({isOpen,closeSideBar}:{isOpen: boolean;closeSideBar: any}) => {
         </Link>
         </div>
       </div>
+    </div>
     </div>
   );
 };
