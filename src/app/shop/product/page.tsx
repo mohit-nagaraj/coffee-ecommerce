@@ -3,8 +3,11 @@ import React, { Suspense, useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 const ProductDetailsContent = () => {
+  // const user = 8055;
+  const cartId= 1;
   // get the product id from url
   const searchParams = useSearchParams();
   const id = parseInt(searchParams.get("pid") || "0");
@@ -19,6 +22,14 @@ const ProductDetailsContent = () => {
     getProduct();
   }, [id]);
 
+  const addToCart = async () => {
+    await axios.post("/api/order-details", {
+      cartId: cartId,
+      productId: id,
+      qty: 1,
+    });
+    toast.success('Added into cart')
+  }
   return (
     <div>
       <title>{"CoffeeBlend - " + product?.title}</title>
@@ -45,7 +56,7 @@ const ProductDetailsContent = () => {
                 </div>
                 <p className="mb-8">{product?.description}</p>
                 <button
-                  onClick={() => {}}
+                  onClick={addToCart}
                   className="bg-primary py-4 px-8 text-white"
                 >
                   Add to cart

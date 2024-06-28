@@ -19,6 +19,9 @@ export const POST = async (req: NextRequest) => {
     },
     include: {
       orderDetails: {
+        orderBy: {
+          id: 'asc', 
+        },
         include: {
           product: {
             include: {

@@ -12,7 +12,7 @@ export const PATCH = async (req: NextRequest) => {
       { status: 400 }
     );
   }
-  if(quantity==0){
+  if (quantity == 0) {
     await db.orderDetail.delete({
       where: {
         id: orderDetailId,
@@ -28,8 +28,56 @@ export const PATCH = async (req: NextRequest) => {
       },
     });
   }
-  
+
   return NextResponse.json({
-    message: "success"
+    message: "success",
   });
+};
+
+export const POST = async (req: NextRequest) => {
+  // to insert a new order detail for existing cart
+  const body = await req.json();
+  const { productId, qty, cartId } = body;
+  //check if the product exists in the cart
+  try {
+    const orderDetail = await db.orderDetail.findFirst({
+      where: {
+        cartId: cartId,
+        productId: productId,
+      },
+    });
+    if (orderDetail) {
+      await db.orderDetail.update({
+        where: {
+          id: orderDetail.id,
+        },
+        data: {
+          qty: orderDetail.qty + qty,
+        },
+      });
+    } else {
+      await db.orderDetail.create({
+        data: {
+          qty: qty,
+          product: {
+            connect: {
+              id: productId,
+            },
+          },
+          Cart: {
+            connect: {
+              id: cartId,
+            },
+          },
+        },
+      });
+    }
+    return NextResponse.json({
+      message: "success",
+    });
+  } catch (e) {
+    return NextResponse.json({
+      message: "error",
+    });
+  }
 };

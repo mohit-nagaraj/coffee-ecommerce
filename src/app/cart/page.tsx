@@ -1,16 +1,32 @@
 "use client";
 import CartItem from "@/components/CartItem";
 import Footer from "@/components/Footer";
-import { cart } from "@/util/dummy";
+import axios from "axios";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
 
 const page = () => {
+  const user = 8055;
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState<{ id: number }[]>([]);
+  const [total, setTotal] = useState<number>(0);
+
+  const getCart = async () => {
+    const { data } = await axios.post(`/api/cart-details`, {
+      customerId: user,
+    });
+    setCart(data.data.cart);
+    setTotal(data.data.total);
+  };
+
+  useEffect(() => {
+    getCart();
+  }, [user]);
+  
   return (
     <section className="h-screen pt-20">
       <title>Cart</title>
@@ -29,7 +45,7 @@ const page = () => {
               </div> :
               (
                 cart.map((item) => {
-                  return <CartItem getCart={()=>{}} setLoading={setLoading} item={item} key={item.id} />;
+                  return <CartItem getCart={getCart} setLoading={setLoading} item={item} key={item.id} />;
                 })
               )}
             </div>
@@ -72,7 +88,7 @@ const page = () => {
               <div className="flex w-full justify-between items-center">
                 <div className="font-semibold">
                   <span className="mr-2">Subtotal:</span> ₹{" "}
-                  {parseFloat("1000").toFixed(2)}
+                  {total}
                 </div>
                 <div
                   onClick={() => {}}
