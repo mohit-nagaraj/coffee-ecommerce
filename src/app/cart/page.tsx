@@ -10,6 +10,7 @@ const page = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
   return (
     <section className="h-screen pt-20">
       <title>Cart</title>
@@ -22,9 +23,13 @@ const page = () => {
                 <div className="text-center text-lg font-semibold">
                   Cart is empty
                 </div>
-              ) : (
+              ) : loading?
+              <div className="flex justify-center items-center h-96">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
+              </div> :
+              (
                 cart.map((item) => {
-                  return <CartItem item={item} key={item.id} />;
+                  return <CartItem getCart={()=>{}} setLoading={setLoading} item={item} key={item.id} />;
                 })
               )}
             </div>
