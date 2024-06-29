@@ -23,10 +23,14 @@ const page = () => {
     setTotal(data.data.total);
   };
 
+  const makeOrder = async() => {
+    await axios.post(`/api/checkout`,{})
+  };
+
   useEffect(() => {
     getCart();
   }, [user]);
-  
+
   return (
     <section className="h-screen pt-20">
       <title>Cart</title>
@@ -39,13 +43,20 @@ const page = () => {
                 <div className="text-center text-lg font-semibold">
                   Cart is empty
                 </div>
-              ) : loading?
-              <div className="flex justify-center items-center h-96">
-                <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
-              </div> :
-              (
+              ) : loading ? (
+                <div className="flex justify-center items-center h-96">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
+                </div>
+              ) : (
                 cart.map((item) => {
-                  return <CartItem getCart={getCart} setLoading={setLoading} item={item} key={item.id} />;
+                  return (
+                    <CartItem
+                      getCart={getCart}
+                      setLoading={setLoading}
+                      item={item}
+                      key={item.id}
+                    />
+                  );
                 })
               )}
             </div>
@@ -87,8 +98,7 @@ const page = () => {
               </div>
               <div className="flex w-full justify-between items-center">
                 <div className="font-semibold">
-                  <span className="mr-2">Subtotal:</span> ₹{" "}
-                  {total}
+                  <span className="mr-2">Subtotal:</span> ₹ {total}
                 </div>
                 <div
                   onClick={() => {}}
@@ -98,12 +108,13 @@ const page = () => {
                 </div>
               </div>
 
-              <Link
-                href={"/"}
-                className="bg-primary flex p-3 justify-center items-center text-white w-full font-medium"
+
+              <div
+                onClick={makeOrder}
+                className="bg-primary flex p-3 justify-center items-center text-white w-full font-medium cursor-pointer"
               >
                 Checkout
-              </Link>
+              </div>
             </div>
           </div>
         </div>

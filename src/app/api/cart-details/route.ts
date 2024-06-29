@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest) => {
     include: {
       orderDetails: {
         orderBy: {
-          id: 'asc', 
+          id: "asc",
         },
         include: {
           product: {
@@ -33,10 +33,7 @@ export const POST = async (req: NextRequest) => {
     },
   });
   if (!cart) {
-    return NextResponse.json(
-      { message: "Cart not found" },
-      { status: 404 }
-    );
+    return NextResponse.json({ message: "Cart not found" }, { status: 404 });
   }
   let total = 0;
   const updatedCart = cart.orderDetails.map((item) => {
@@ -54,6 +51,25 @@ export const POST = async (req: NextRequest) => {
     data: {
       total: total,
       cart: updatedCart,
-    }
+    },
   });
+};
+
+export const DELETE = async (req: NextRequest) => {
+  const body = await req.json();
+  const { cartId } = body;
+  try {
+    await db.orderDetail.deleteMany({
+      where: {
+        cartId: cartId,
+      },
+    });
+    return NextResponse.json({
+      message: "success",
+    });
+  } catch (e) {
+    return NextResponse.json({
+      message: "error",
+    });
+  }
 };

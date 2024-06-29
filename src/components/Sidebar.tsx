@@ -18,6 +18,7 @@ const Sidebar = ({
 }) => {
   //get user id from authentication
   const user = 8055;
+  const cartId = 1;
   const [cart, setCart] = useState<{ id: number }[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState(false);
@@ -28,6 +29,20 @@ const Sidebar = ({
     });
     setCart(data.data.cart);
     setTotal(data.data.total);
+  };
+
+  const clearCart = async () => {
+    try {
+      await axios.delete(`/api/cart-details`, {
+        data: {
+          cartId: cartId,
+        },
+      });
+      setCart([]);
+      setTotal(0);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -64,7 +79,12 @@ const Sidebar = ({
           ) : (
             cart.map((item) => {
               return (
-                <CartItem getCart={getCart} setLoading={setLoading} item={item} key={item.id} />
+                <CartItem
+                  getCart={getCart}
+                  setLoading={setLoading}
+                  item={item}
+                  key={item.id}
+                />
               );
             })
           )}
@@ -77,7 +97,7 @@ const Sidebar = ({
             </div>
             {/* clear cart icon */}
             <div
-              onClick={() => {}}
+              onClick={clearCart}
               className="cursor-pointer py-4 bg-red-500 text-white w-12 h-12 flex justify-center items-center text-xl"
             >
               <FiTrash2 />

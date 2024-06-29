@@ -50,7 +50,6 @@ model Cart {
 
 model Order {
   id           Int           @id @default(autoincrement())
-  date         DateTime
   time         DateTime
   customerId   Int
   customer     Customer      @relation("CustomerOrders", fields: [customerId], references: [id])
