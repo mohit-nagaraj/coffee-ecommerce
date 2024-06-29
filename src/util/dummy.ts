@@ -82,7 +82,7 @@ export const products = [
 ];
 
 
-export const cart= [
+export const cart = [
     {
         id: 381781,
         image: "https://jubileegrocery.com/wp-content/uploads/2024/01/516J5OB73qL.jpg",
@@ -132,3 +132,93 @@ export const cart= [
         amount: 1
     }
 ]
+
+
+export const dailySaleData: {
+    labels: string[];
+    values: number[]
+} = {
+    labels: ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"],
+    values: [500, 700, 200, 1000, 400, 800, 300]
+}
+
+export const monthlySalesData: {
+    labels: string[];
+    values: number[]
+} = {
+    labels: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ],
+    values: [
+        5000, 7000, 2000, 10000, 4000, 8000, 3000, 9000, 11000, 15000, 13000, 12000,
+    ]
+}
+export const yearlySalesData: {
+    labels: string[];
+    values: number[]
+} = {
+    labels: ["2020", "2021", "2022", "2023"],
+    values: [50000, 70000, 90000, 110000]
+}
+
+export const topPerformingProductsData: { labels: string[], sales: number[], backgroundColor: string[], borderColor: string[] } = {
+    labels: [
+        "Coffee A",
+        "Coffee B",
+        "Coffee C",
+        "Coffee D",
+        "Coffee E",
+    ],
+    sales: [300, 500, 900, 400, 200],
+    backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+    ],
+    borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+    ],
+
+}
+export const bottomPerformingProductsData: { labels: string[], sales: number[], backgroundColor: string[], borderColor: string[] } = {
+    labels: [
+        "Coffee A",
+        "Coffee B",
+        "Coffee C",
+        "Coffee D",
+        "Coffee E",
+    ],
+    sales: [300, 500, 900, 400, 200],
+
+    backgroundColor: [
+        'rgba(0, 78, 100, 0.2)',
+        'rgba(0, 165, 207, 0.2)',
+        'rgba(112, 162, 136, 0.2)',
+        'rgba(37, 161, 142, 0.2)',
+        'rgba(122, 229, 130, 0.2)',
+    ],
+    borderColor: [
+        'rgba(0, 78, 100, 1)',
+        'rgba(0, 165, 207, 1)',
+        'rgba(112, 162, 136, 1)',
+        'rgba(37, 161, 142, 1)',
+        'rgba(122, 229, 130, 1)',
+    ],
+}

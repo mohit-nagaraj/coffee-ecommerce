@@ -43,7 +43,7 @@ const SalesChart: React.FC<ChartProps> = ({
         data: data,
         fill: false,
         backgroundColor: `rgb(${color ? color : "212, 163, 115"})`,
-        borderColor: `rgba(${color ? color : "212, 163, 115"}, 0.7)`,
+        borderColor: `rgba(${color ? color : "212, 163, 115"}, 0.5)`,
         tension: 0.3,
       },
     ],
