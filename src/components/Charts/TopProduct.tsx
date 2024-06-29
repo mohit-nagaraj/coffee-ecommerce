@@ -26,7 +26,7 @@ const TopProductsChart: React.FC<ChartProps> = ({
       {
         label: "Sales",
         data: data,
-        backgroundColor: backgroundColor,   
+        backgroundColor: backgroundColor,
         borderColor: borderColor,
         borderWidth: 1,
       },
