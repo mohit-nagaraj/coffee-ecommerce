@@ -5,7 +5,11 @@ import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
+import { loadStripe } from '@stripe/stripe-js';
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ""
+);
 const page = () => {
   const user = 8055;
   const [name, setName] = useState("");
@@ -13,6 +17,7 @@ const page = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useState<{ id: number }[]>([]);
+  const [cartId, setCartId] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
 
   const getCart = async () => {
@@ -21,10 +26,18 @@ const page = () => {
     });
     setCart(data.data.cart);
     setTotal(data.data.total);
+    setCartId(data.data.cart_id);
   };
 
   const makeOrder = async() => {
-    await axios.post(`/api/checkout`,{})
+    await axios.post(`/api/checkout`,{
+      customer_id: user,
+      delivery_name: name,
+      delivery_phoneNum: phoneNumber,
+      delivery_address: address,
+      cart_id: cartId,
+      total: total,
+    })
   };
 
   useEffect(() => {

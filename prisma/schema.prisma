@@ -82,6 +82,9 @@ model Delivery {
   departure    DateTime
   arrival      DateTime
   departureBoy String
+  name        String
+  phoneNum     String
+  address      String
   orderId      Int      @unique
   order        Order    @relation(fields: [orderId], references: [id])
 }

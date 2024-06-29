@@ -51,6 +51,7 @@ export const POST = async (req: NextRequest) => {
     data: {
       total: total,
       cart: updatedCart,
+      cart_id: cart.id,
     },
   });
 };
