@@ -98,16 +98,16 @@ export const POST = async (req: NextRequest) => {
   //     cashPaid: 0,
   //   },
   // });
-  // start a stripe session
+
   try {
     // Create Checkout Sessions from body params.
     const session = await stripe.checkout.sessions.create({
       line_items: [{
         price_data: {
           currency: "inr",
-          unit_amount: total,
+          unit_amount: total*100,
           product_data: {
-            name: "Name of the product",
+            name: "CoffeeBlend",
           },
         },
         quantity: 1,
@@ -116,7 +116,7 @@ export const POST = async (req: NextRequest) => {
       success_url: `https://sem4-proj.vercel.app/?success=true`,
       cancel_url: `https://sem4-proj.vercel.app/?canceled=true`,
     });
-    return NextResponse.redirect(session.url);
+    return NextResponse.json({ url: session.url });
   } catch (err:any) {
     console.log(err);
     return NextResponse.error();

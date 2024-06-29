@@ -30,7 +30,7 @@ const page = () => {
   };
 
   const makeOrder = async() => {
-    await axios.post(`/api/checkout`,{
+    const { data } = await axios.post(`/api/checkout`,{
       customer_id: user,
       delivery_name: name,
       delivery_phoneNum: phoneNumber,
@@ -38,6 +38,7 @@ const page = () => {
       cart_id: cartId,
       total: total,
     })
+    window.location.href = data.url;
   };
 
   useEffect(() => {
