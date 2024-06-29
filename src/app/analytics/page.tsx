@@ -1,3 +1,4 @@
+import AverageSpendChart from "@/components/Charts/AverageSpendChart";
 import SalesChart from "@/components/Charts/SalesChart";
 import TopProductsChart from "@/components/Charts/TopProduct";
 import {
@@ -5,8 +6,10 @@ import {
   monthlySalesData,
   yearlySalesData,
   topPerformingProductsData,
-  bottomPerformingProductsData
+  bottomPerformingProductsData,
+  averageSpendData
 } from "@/util/dummy";
+
 
 const Analytics: React.FC = () => {
   return (
@@ -60,6 +63,20 @@ const Analytics: React.FC = () => {
                 title="Bottom Performing Products"
                 backgroundColor={bottomPerformingProductsData.backgroundColor}
                 borderColor={bottomPerformingProductsData.borderColor}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col w-full h-fit justify-center items-center gap-2">
+          <h1 className="font-semibold text-xl text-center">
+            Average Spend per Customer
+          </h1>
+          <div className="flex flex-wrap gap-4 w-full justify-center items-center">
+            <div className="border-2 border-black/30 h-fit w-full lg:w-[450px] p-4 rounded-xl flex justify-center items-center md:w-fit">
+              <AverageSpendChart
+                labels={averageSpendData.labels}
+                data={averageSpendData.spend}
+                title="Average Spend per Customer"
               />
             </div>
           </div>

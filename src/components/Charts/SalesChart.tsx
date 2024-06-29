@@ -42,9 +42,10 @@ const SalesChart: React.FC<ChartProps> = ({
         label: "Income",
         data: data,
         fill: false,
-        backgroundColor: `rgb(${color ? color : "212, 163, 115"})`,
-        borderColor: `rgba(${color ? color : "212, 163, 115"}, 0.5)`,
+        backgroundColor: `rgb(${color ? color : "212, 163, 115"}, 0.3)`,
+        borderColor: `rgba(${color ? color : "212, 163, 115"}, 0.7)`,
         tension: 0.3,
+        borderWidth: 1,
       },
     ],
   };

@@ -222,3 +222,7 @@ export const bottomPerformingProductsData: { labels: string[], sales: number[], 
         'rgba(122, 229, 130, 1)',
     ],
 }
+export const averageSpendData: { labels: string[], spend: number[] } = {
+    labels: ["2020", "2021", "2022", "2023", "2024"],
+    spend: [250, 200, 450, 220, 300]
+}
