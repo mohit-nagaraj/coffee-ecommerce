@@ -1,15 +1,50 @@
 "use client";
 import CartItem from "@/components/CartItem";
 import Footer from "@/components/Footer";
-import { cart } from "@/util/dummy";
+import axios from "axios";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiTrash2 } from "react-icons/fi";
+import { loadStripe } from '@stripe/stripe-js';
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ?? ""
+);
 const page = () => {
+  const user = 8055;
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [cart, setCart] = useState<{ id: number }[]>([]);
+  const [cartId, setCartId] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
+
+  const getCart = async () => {
+    const { data } = await axios.post(`/api/cart-details`, {
+      customerId: user,
+    });
+    setCart(data.data.cart);
+    setTotal(data.data.total);
+    setCartId(data.data.cart_id);
+  };
+
+  const makeOrder = async() => {
+    const { data } = await axios.post(`/api/checkout`,{
+      customer_id: user,
+      delivery_name: name,
+      delivery_phoneNum: phoneNumber,
+      delivery_address: address,
+      cart_id: cartId,
+      total: total,
+    })
+    window.location.href = data.url;
+  };
+
+  useEffect(() => {
+    getCart();
+  }, [user]);
+
   return (
     <section className="h-screen pt-20">
       <title>Cart</title>
@@ -22,9 +57,20 @@ const page = () => {
                 <div className="text-center text-lg font-semibold">
                   Cart is empty
                 </div>
+              ) : loading ? (
+                <div className="flex justify-center items-center h-96">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-primary"></div>
+                </div>
               ) : (
                 cart.map((item) => {
-                  return <CartItem item={item} key={item.id} />;
+                  return (
+                    <CartItem
+                      getCart={getCart}
+                      setLoading={setLoading}
+                      item={item}
+                      key={item.id}
+                    />
+                  );
                 })
               )}
             </div>
@@ -66,8 +112,7 @@ const page = () => {
               </div>
               <div className="flex w-full justify-between items-center">
                 <div className="font-semibold">
-                  <span className="mr-2">Subtotal:</span> ₹{" "}
-                  {parseFloat("1000").toFixed(2)}
+                  <span className="mr-2">Subtotal:</span> ₹ {total}
                 </div>
                 <div
                   onClick={() => {}}
@@ -77,12 +122,13 @@ const page = () => {
                 </div>
               </div>
 
-              <Link
-                href={"/"}
-                className="bg-primary flex p-3 justify-center items-center text-white w-full font-medium"
+
+              <div
+                onClick={makeOrder}
+                className="bg-primary flex p-3 justify-center items-center text-white w-full font-medium cursor-pointer"
               >
                 Checkout
-              </Link>
+              </div>
             </div>
           </div>
         </div>

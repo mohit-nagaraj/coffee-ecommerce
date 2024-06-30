@@ -24,7 +24,6 @@ model Product {
   subCategoryId Int
   category      SubCategory   @relation(fields: [subCategoryId], references: [id])
   OrderDetail   OrderDetail[]
-  Cart          Cart[]
 }
 
 model SubCategory {
@@ -39,22 +38,18 @@ model Customer {
   phone   String  @unique
   address String
   orders  Order[] @relation("CustomerOrders")
-  cart    Cart[]
+  cart    Cart?
 }
 
 model Cart {
-  id         Int      @id @default(autoincrement())
-  customerId Int
-  customer   Customer @relation(fields: [customerId], references: [id])
-  productId  Int
-  product    Product  @relation(fields: [productId], references: [id])
-  qty        Int
-  amount     Float
+  id           Int           @id @default(autoincrement())
+  customerId   Int           @unique
+  customer     Customer      @relation(fields: [customerId], references: [id])
+  orderDetails OrderDetail[]
 }
 
 model Order {
   id           Int           @id @default(autoincrement())
-  date         DateTime
   time         DateTime
   customerId   Int
   customer     Customer      @relation("CustomerOrders", fields: [customerId], references: [id])
@@ -65,12 +60,13 @@ model Order {
 
 model OrderDetail {
   id        Int     @id @default(autoincrement())
-  orderId   Int
-  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   Int?
+  order     Order?  @relation(fields: [orderId], references: [id])
   productId Int
   product   Product @relation(fields: [productId], references: [id])
   qty       Int
-  amount    Float
+  Cart      Cart?   @relation(fields: [cartId], references: [id])
+  cartId    Int?
 }
 
 model Payment {
@@ -86,6 +82,9 @@ model Delivery {
   departure    DateTime
   arrival      DateTime
   departureBoy String
+  name        String
+  phoneNum     String
+  address      String
   orderId      Int      @unique
   order        Order    @relation(fields: [orderId], references: [id])
 }
