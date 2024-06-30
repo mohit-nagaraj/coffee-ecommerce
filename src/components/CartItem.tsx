@@ -6,7 +6,7 @@ import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
 const CartItem = ({ item, setLoading, getCart }: { item: any; setLoading: any; getCart:any; }) => {
   // destructure item
   const { id, title, image, price, amount } = item;
-  
+
   const handleReduce = async() => {
     setLoading(true);
     if (amount > 1) {
@@ -19,7 +19,7 @@ const CartItem = ({ item, setLoading, getCart }: { item: any; setLoading: any; g
       await axios.patch(`/api/order-details`, { orderDetailId: id, quantity: 0 })
       .then(() => {
         // remove item from cart;
-        
+
       }).finally(() => setLoading(false));
     }
   };
