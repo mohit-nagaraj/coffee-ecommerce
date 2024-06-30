@@ -14,90 +14,90 @@ export const POST = async (req: NextRequest) => {
     cart_id,
     total,
   } = body;
-  // const date = new Date();
+  const date = new Date();
 
-  // const isoDateString = convertToIST(date);
+  const isoDateString = convertToIST(date);
 
-  // const res = await db.order.create({
-  //   data: {
-  //     time: isoDateString,
-  //     customer: {
-  //       connect: {
-  //         id: customer_id,
-  //       },
-  //     },
-  //   },
-  // });
-  // const cart = await db.cart.findUnique({
-  //   where: {
-  //     id: cart_id,
-  //   },
-  //   include: {
-  //     orderDetails: true,
-  //   },
-  // });
+  const res = await db.order.create({
+    data: {
+      time: isoDateString,
+      customer: {
+        connect: {
+          id: customer_id,
+        },
+      },
+    },
+  });
+  const cart = await db.cart.findUnique({
+    where: {
+      id: cart_id,
+    },
+    include: {
+      orderDetails: true,
+    },
+  });
 
-  // const orderDetails = cart?.orderDetails ?? [];
+  const orderDetails = cart?.orderDetails ?? [];
 
-  // await db.cart.update({
-  //   where: {
-  //     id: cart_id,
-  //   },
-  //   data: {
-  //     orderDetails: {
-  //       disconnect: orderDetails.map((orderDetail) => ({
-  //         id: orderDetail.id,
-  //       })),
-  //     },
-  //   },
-  // });
+  await db.cart.update({
+    where: {
+      id: cart_id,
+    },
+    data: {
+      orderDetails: {
+        disconnect: orderDetails.map((orderDetail) => ({
+          id: orderDetail.id,
+        })),
+      },
+    },
+  });
 
-  // await db.order.update({
-  //   where: {
-  //     id: res.id,
-  //   },
-  //   data: {
-  //     orderDetails: {
-  //       connect: orderDetails.map((orderDetail) => ({
-  //         id: orderDetail.id,
-  //       })),
-  //     },
-  //   },
-  // });
-  // const departure_time = convertToIST(addTime(date, 1));
-  // const randomInteger = Math.floor(Math.random() * 5) + 2;
-  // const arrival_time = convertToIST(addTime(date, randomInteger));
-  // departure_names;
-  // const randomIndex = Math.floor(Math.random() * departure_names.length);
-  // const departure_name = departure_names[randomIndex];
+  await db.order.update({
+    where: {
+      id: res.id,
+    },
+    data: {
+      orderDetails: {
+        connect: orderDetails.map((orderDetail) => ({
+          id: orderDetail.id,
+        })),
+      },
+    },
+  });
+  const departure_time = convertToIST(addTime(date, 1));
+  const randomInteger = Math.floor(Math.random() * 5) + 2;
+  const arrival_time = convertToIST(addTime(date, randomInteger));
+  departure_names;
+  const randomIndex = Math.floor(Math.random() * departure_names.length);
+  const departure_name = departure_names[randomIndex];
 
-  // const delres = await db.delivery.create({
-  //   data: {
-  //     order: {
-  //       connect: {
-  //         id: res.id,
-  //       },
-  //     },
-  //     departure: departure_time,
-  //     arrival: arrival_time,
-  //     departureBoy: departure_name,
-  //     name: delivery_name,
-  //     phoneNum: delivery_phoneNum,
-  //     address: delivery_address,
-  //   },
-  // });
+  const delres = await db.delivery.create({
+    data: {
+      order: {
+        connect: {
+          id: res.id,
+        },
+      },
+      departure: departure_time,
+      arrival: arrival_time,
+      departureBoy: departure_name,
+      name: delivery_name,
+      phoneNum: delivery_phoneNum,
+      address: delivery_address,
+    },
+  });
 
-  // const payres = await db.payment.create({
-  //   data: {
-  //     order: {
-  //       connect: {
-  //         id: res.id,
-  //       },
-  //     },
-  //     netPrice: total,
-  //     cashPaid: 0,
-  //   },
-  // });
+  const payres = await db.payment.create({
+    data: {
+      order: {
+        connect: {
+          id: res.id,
+        },
+      },
+      netPrice: total,
+      cashPaid: 0,
+    },
+  });
 
   try {
     // Create Checkout Sessions from body params.
