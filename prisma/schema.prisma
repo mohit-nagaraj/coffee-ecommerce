@@ -45,7 +45,7 @@ model Cart {
   id           Int           @id @default(autoincrement())
   customerId   Int           @unique
   customer     Customer      @relation(fields: [customerId], references: [id])
-  orderDetails OrderDetail[]  
+  orderDetails OrderDetail[]
 }
 
 model Order {
