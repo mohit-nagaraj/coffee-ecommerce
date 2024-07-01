@@ -49,6 +49,10 @@ export const POST = async (req: NextRequest) => {
         }),
     }
     return NextResponse.json({ data: res });
+  } else if (type == "success") {
+    return NextResponse.json({ data: "Hello world" });
+  } else if (type == "cancel") {
+    return NextResponse.json({ status: "ok" });
   }
   return NextResponse.json({ message: "Invalid type" }, { status: 400 });
 };

@@ -14,7 +14,7 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const type = searchParams.get("type") || "default";
-  const [res, setRes] = useState<any>({  });
+  const [res, setRes] = useState<any>({});
 
   const getDetails = async () => {
     setLoading(true);
@@ -34,7 +34,6 @@ const page = () => {
 
   useEffect(() => {
     // getDetails();
-    
   }, []);
 
   return (
@@ -43,7 +42,7 @@ const page = () => {
       <div className="h-full pb-10">
         <div className="h-full container mx-auto">
           <div>
-            <h1 className="text-3xl font-semibold ">Your order</h1>
+            <h1 className="text-3xl font-semibold ">{type=='success'?'Order Placed Sucessfully🍵':'Your Order'}</h1>
             <div className="flex gap-2 mb-4 items-center">
               <h2 className=" text-xl text-gray-500">
                 {"Order Number #" + orderid}
@@ -82,8 +81,17 @@ const page = () => {
                 )}
               </div>
               <div className="flex flex-1 flex-col gap-y-3  mt-4">
-                <div className="flex flex-col gap-2 py-4 mb-4 border-b border-gray-200">
-                  <h1 className="text-xl font-semibold">Payment details</h1>
+                <div className="flex flex-col gap-3 py-4 mb-4 border-b border-gray-200">
+                  <div>
+                    <h1 className="text-xl font-semibold">Payment details</h1>
+                    {type == "cancel" && (
+                      <div className="text-sm text-red-400">
+                        Your payment didnt go through. You can retry once again.
+                        If any money was debited, it will be credited back to
+                        you soon.
+                      </div>
+                    )}
+                  </div>
                   <div className="flex justify-between">
                     <div className="flex flex-col g-1 w-44">
                       <p className=" text-gray-600 flex justify-between">
@@ -131,7 +139,9 @@ const page = () => {
                       <div>
                         <h2 className=" text-xl">Shipper details</h2>
                         <div className="text-gray-500">
-                          <p>CoffeeBlend, Delivery agent: {res.delivery?.agent}</p>
+                          <p>
+                            CoffeeBlend, Delivery agent: {res.delivery?.agent}
+                          </p>
                           <p className="text-gray-900">
                             Expected Packed Time:{" "}
                             {res.delivery?.departure &&
