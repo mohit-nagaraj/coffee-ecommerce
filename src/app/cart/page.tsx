@@ -69,6 +69,7 @@ const page = () => {
                       setLoading={setLoading}
                       item={item}
                       key={item.id}
+                      type="any"
                     />
                   );
                 })

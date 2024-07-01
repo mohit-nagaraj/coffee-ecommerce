@@ -40,6 +40,7 @@ export const POST = async (req: NextRequest) => {
     total += item.product.price * item.qty;
     return {
       id: item.id,
+      pid: item.productId,
       image: item.product.image,
       category: item.product.category.name,
       title: item.product.title,

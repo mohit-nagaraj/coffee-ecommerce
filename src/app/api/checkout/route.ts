@@ -67,11 +67,11 @@ export const POST = async (req: NextRequest) => {
   const departure_time = convertToIST(addTime(date, 1));
   const randomInteger = Math.floor(Math.random() * 5) + 2;
   const arrival_time = convertToIST(addTime(date, randomInteger));
-  departure_names;
+  // departure_names;
   const randomIndex = Math.floor(Math.random() * departure_names.length);
   const departure_name = departure_names[randomIndex];
 
-  const delres = await db.delivery.create({
+  await db.delivery.create({
     data: {
       order: {
         connect: {
