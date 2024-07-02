@@ -37,7 +37,7 @@ const page = () => {
   };
 
   useEffect(() => {
-    // getDetails();
+    getDetails();
   }, []);
 
   return (
