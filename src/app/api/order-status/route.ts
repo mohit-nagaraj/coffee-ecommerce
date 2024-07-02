@@ -106,6 +106,6 @@ export const POST = async (req: NextRequest) => {
       }),
     };
     return NextResponse.json({ data: res });
-  } 
+  }
   return NextResponse.json({ message: "Invalid type" }, { status: 400 });
 };
