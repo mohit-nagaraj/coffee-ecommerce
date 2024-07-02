@@ -14,7 +14,7 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const type = searchParams.get("type") || "default";
-  const pay_id= searchParams.get("pay_id") || null;
+  const pay_id= searchParams.get("pay_id") || 0;
   const amount = searchParams.get("amount") || 0;
   const [res, setRes] = useState<any>({});
 
@@ -24,8 +24,8 @@ const page = () => {
       const { data } = await axios.post("/api/order-status", {
         type: type,
         id: parseInt(orderid.toString()),
-        pay_id: pay_id,
-        amount: amount,
+        pay_id: parseInt(pay_id.toString()),
+        amount: parseInt(amount.toString()),
       });
       setRes(data.data);
     } catch (e) {
@@ -37,7 +37,7 @@ const page = () => {
   };
 
   useEffect(() => {
-    // getDetails();
+    getDetails();
   }, []);
 
   return (
