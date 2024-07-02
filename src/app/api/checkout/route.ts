@@ -67,11 +67,11 @@ export const POST = async (req: NextRequest) => {
   const departure_time = convertToIST(addTime(date, 1));
   const randomInteger = Math.floor(Math.random() * 5) + 2;
   const arrival_time = convertToIST(addTime(date, randomInteger));
-  departure_names;
+  // departure_names;
   const randomIndex = Math.floor(Math.random() * departure_names.length);
   const departure_name = departure_names[randomIndex];
 
-  const delres = await db.delivery.create({
+  await db.delivery.create({
     data: {
       order: {
         connect: {
@@ -113,8 +113,8 @@ export const POST = async (req: NextRequest) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: `https://sem4-proj.vercel.app/?success=true`,
-      cancel_url: `https://sem4-proj.vercel.app/?canceled=true`,
+      success_url: `https://sem4-proj.vercel.app/order/${res.id}?type=success&pay_id=${payres.id}&amount=${total}`,
+      cancel_url: `https://sem4-proj.vercel.app/order/${res.id}?type=cancel&pay_id=${payres.id}`,
     });
     return NextResponse.json({ url: session.url });
   } catch (err:any) {

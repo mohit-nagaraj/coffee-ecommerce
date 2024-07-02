@@ -263,3 +263,25 @@ export const departure_names = [
   "Ayaan",
   "Reyansh",
 ];
+
+
+export const order_items=[
+  {
+    id: 129812,
+    image:
+      "https://jubileegrocery.com/wp-content/uploads/2024/01/71gp0wuDUnL.jpg",
+    category: "Espresso",
+    title: "Italian Espresso Blend",
+    price: 1799,
+    amount: 1,
+  },
+  {
+    id: 919884,
+    image:
+      "https://jubileegrocery.com/wp-content/uploads/2023/12/41YyWj8RE7L.jpg",
+    category: "Ground Coffee",
+    title: "French Roast Ground Coffee",
+    price: 999,
+    amount: 1,
+  },
+]
