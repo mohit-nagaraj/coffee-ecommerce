@@ -15,6 +15,7 @@ const page = () => {
   const searchParams = useSearchParams();
   const type = searchParams.get("type") || "default";
   const pay_id= searchParams.get("pay_id") || null;
+  const amount = searchParams.get("amount") || 0;
   const [res, setRes] = useState<any>({});
 
   const getDetails = async () => {
@@ -24,6 +25,7 @@ const page = () => {
         type: type,
         id: parseInt(orderid.toString()),
         pay_id: pay_id,
+        amount: amount,
       });
       setRes(data.data);
     } catch (e) {
