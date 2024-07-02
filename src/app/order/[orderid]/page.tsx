@@ -14,6 +14,7 @@ const page = () => {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const type = searchParams.get("type") || "default";
+  const pay_id= searchParams.get("pay_id") || null;
   const [res, setRes] = useState<any>({});
 
   const getDetails = async () => {
@@ -22,6 +23,7 @@ const page = () => {
       const { data } = await axios.post("/api/order-status", {
         type: type,
         id: parseInt(orderid.toString()),
+        pay_id: pay_id,
       });
       setRes(data.data);
     } catch (e) {

@@ -50,7 +50,46 @@ export const POST = async (req: NextRequest) => {
     }
     return NextResponse.json({ data: res });
   } else if (type == "success") {
-    return NextResponse.json({ data: "Hello world" });
+    const pay_id=body.pay_id;
+    console.log('pay_id',pay_id);
+    const product = await db.order.findUnique({
+      where: { id },
+      include: {
+        orderDetails: {
+          include: {
+            product: true,
+          },
+        },
+        payment: true,
+        delivery: true,
+      },
+    });
+    const res = {
+        id: product?.id,
+        delivery: {
+            address: product?.delivery?.address,
+            arrival: product?.delivery?.arrival ? convertToIST(product.delivery.arrival) : undefined,
+            departure: product?.delivery?.departure ? convertToIST(product.delivery.departure) : undefined,
+            agent: product?.delivery?.departureBoy,
+            name: product?.delivery?.name,
+            phone: product?.delivery?.phoneNum,
+        },
+        payment: {
+            net_price: product?.payment?.netPrice,
+            cash_paid: product?.payment?.cashPaid,
+        },
+        orderDetails: product?.orderDetails.map((item) => {
+            return {
+                id: item.id,
+                image: item.product.image,
+                title: item.product.title,
+                price: item.product.price,
+                pid: item.productId,
+                amount: item.qty,
+            };
+        }),
+    }
+    return NextResponse.json({ data: res });
   } else if (type == "cancel") {
     return NextResponse.json({ status: "ok" });
   }
