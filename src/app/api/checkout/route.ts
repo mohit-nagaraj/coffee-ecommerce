@@ -113,8 +113,8 @@ export const POST = async (req: NextRequest) => {
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: `https://sem4-proj.vercel.app/order/${res.id}?type=success&pay_id=${payres.id}&amount=${total}`,
-      cancel_url: `https://sem4-proj.vercel.app/order/${res.id}?type=cancel&pay_id=${payres.id}`,
+      success_url: `http://localhost:3000/order/${res.id}?type=success&pay_id=${payres.id}&amount=${total}`,
+      cancel_url: `http://localhost:3000/order/${res.id}?type=cancel&pay_id=${payres.id}`,
     });
     return NextResponse.json({ url: session.url });
   } catch (err:any) {
