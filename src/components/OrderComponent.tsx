@@ -30,7 +30,7 @@ const OrderComponent = () => {
               <h4 className=" text-md font-semibold text-black ">Order ID: {order.id}</h4>
               <span className="text-sm font-medium text-gray-400">{order.product.title}</span>
             </div>
-         </div> 
+         </div>
         ))}
       </div>
     </div>
