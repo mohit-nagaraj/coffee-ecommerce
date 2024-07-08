@@ -33,8 +33,8 @@ const AverageSpendChart: React.FC<ChartProps> = ({ labels, data, title }) => {
       {
         label: 'Average Spend',
         data: data,
-        backgroundColor: 'rgb(244, 162, 97, 0.2)',
-        borderColor: 'rgb(244, 162, 97, 1)',
+        backgroundColor: 'rgba(152,107,84,0.4)',
+        borderColor: 'rgba(152,107,84,1)',
         borderWidth: 1,
       },
     ],
