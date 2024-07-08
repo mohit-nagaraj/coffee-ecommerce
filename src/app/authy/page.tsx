@@ -1,7 +1,29 @@
 "use client";
 import Link from "next/link";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { auth } from "../../../firebase";
+import toast from "react-hot-toast";
 
 const page = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const createAccount = async () => {
+    // create account
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        toast.success("User authenticated successfully");
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+  };
   return (
     <section className="w-screen h-screen absolute z-50 bg-white">
       <title>Authentication</title>
@@ -22,11 +44,15 @@ const page = () => {
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                     type="email"
                     placeholder="Email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
                   <input
                     className="w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5"
                     type="password"
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                   />
                   <button className="mt-5 tracking-wide font-semibold bg-primary text-gray-100 w-full py-4 rounded-lg hover:bg-primary transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <svg
@@ -41,7 +67,7 @@ const page = () => {
                       <circle cx="8.5" cy="7" r="4" />
                       <path d="M20 8v6M23 11h-6" />
                     </svg>
-                    <Link href="/">
+                    <Link href="/" onClick={createAccount}>
                       <span className="ml-3">Enter</span>
                     </Link>
                   </button>
