@@ -7,6 +7,10 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <section className="h-[800px] bg-hero bg-no-repeat bg-cover bg-center py-20">
+      {/* a absolute button to naviagte to authentication */}
+      <div className="fixed bottom-10 right-10 mt-4 mr-4">
+        <Link href={'/authy'} className='uppercase font-semibold border-b-2 border-primary'>Login</Link>
+      </div>
       <div className="container mx-auto flex justify-around h-full">
         {/* text */}
         <div className="flex flex-col justify-center pt-14">
