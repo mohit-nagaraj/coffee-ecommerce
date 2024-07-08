@@ -81,3 +81,20 @@ export const POST = async (req: NextRequest) => {
     });
   }
 };
+
+export const GET = async () => {
+  const allOrderDetails = await db.orderDetail.findMany(
+    {
+      include: {
+        product: true,
+      },
+      // limit to 10 order details
+      take: 10,
+      //reverse order
+      orderBy: {
+        id: "desc",
+      },
+    }
+  );
+  return NextResponse.json(allOrderDetails);
+}
